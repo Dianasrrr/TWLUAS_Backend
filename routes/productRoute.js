@@ -32,14 +32,14 @@ router.get('/products/:id', async (req, res) => {
 const multer = require('multer');
 
 // Set up the storage engine and destination for uploaded files
-const storage = multer.diskStorage({
+var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'img/');
+      cb(null, '/tmp')
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname);
+      cb(null, file.originalname)
     }
-});
+})
 
 // Create the Multer instance
 const upload = multer({ storage: storage });
