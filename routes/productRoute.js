@@ -50,6 +50,10 @@ router.post('/products', upload.single('image'), async (req, res) => {
         const newProduct = req.body;
         console.log(newProduct);
         newProduct.image = req.file.originalname; // Access the filename of the uploaded file
+        newProduct.name = req.body.name;
+        newProduct.price = req.body.price;
+        newProduct.description = req.body.description;
+        newProduct.stock = req.body.stock;
         const product = await Product.create(newProduct);
         res.status(201).json(product);
     } catch (error) {
