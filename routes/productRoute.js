@@ -58,7 +58,7 @@ router.post('/products', upload.single('image'), async (req, res) => {
         res.status(201).json(product);
     } catch (error) {
         console.log(error);
-        console.log(this.newProduct);
+        console.log(newProduct); // Log the newProduct directly without 'this'
         res.status(500).json({ error: 'Internal server error' });
     }
 });
