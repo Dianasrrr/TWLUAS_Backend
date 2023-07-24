@@ -10,7 +10,7 @@ require('./database');
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/img', express.static(path.join(__dirname, 'img')))
+app.use('/temp', express.static(path.join(__dirname, 'tmp')))
 
 // Import dan gunakan productRoutes
 const productRoutes = require('./routes/productRoute');
