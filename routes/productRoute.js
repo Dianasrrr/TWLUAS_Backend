@@ -47,21 +47,26 @@ const upload = multer({ storage: storage });
 // Add the Multer middleware to your routes
 router.post('/products', upload.single('image'), async (req, res) => {
     try {
-        const newProduct = req.body;
-        console.log(newProduct);
-        newProduct.image = req.file.originalname; // Access the filename of the uploaded file
-        newProduct.name = req.body.name;
-        newProduct.price = req.body.price;
-        newProduct.description = req.body.description;
-        newProduct.stock = req.body.stock;
-        const product = await Product.create(newProduct);
-        res.status(201).json(product);
+      const newProduct = req.body;
+      console.log(newProduct);
+  
+      if (req.file) {
+        newProduct.image = req.file.originalname;
+      }
+  
+      newProduct.name = req.body.name;
+      newProduct.price = req.body.price;
+      newProduct.description = req.body.description;
+      newProduct.stock = req.body.stock;
+  
+      const product = await Product.create(newProduct);
+      res.status(201).json(product);
     } catch (error) {
-        console.log(error);
-        console.log(newProduct); // Log the newProduct directly without 'this'
-        res.status(500).json({ error: 'Internal server error' });
+      console.log(error);
+      res.status(500).json({ error: 'Internal server error' });
     }
-});
+  });
+  
 
 
 // Rute untuk memperbarui produk berdasarkan ID
