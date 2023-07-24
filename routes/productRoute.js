@@ -54,6 +54,7 @@ router.post('/products', upload.single('image'), async (req, res) => {
         res.status(201).json(product);
     } catch (error) {
         console.log(error);
+        console.log(this.newProduct);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
